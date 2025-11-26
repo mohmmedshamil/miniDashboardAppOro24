@@ -1,9 +1,21 @@
 import React, { useState } from "react";
+import { authAPI } from "../../api/endPoints";
 import "./login.scss";
 
 const Login = () => {
     const [email, setEmail] = useState("eve.holt@reqres.in");
     const [password, setPassword] = useState("cityslicka");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const response = await authAPI.login({ email, password });
+          localStorage.setItem('orotoken', response.data.token);
+        } catch (error) {
+            console.log("error", error)
+        }
+      };
 
     return (
         <div className="login-page">
@@ -43,7 +55,7 @@ const Login = () => {
                             />
                         </div>
 
-                        <button type="submit" className="login-btn">
+                        <button type="submit" onClick={handleSubmit} className="login-btn">
                             Sign In
                         </button>
                     </form>

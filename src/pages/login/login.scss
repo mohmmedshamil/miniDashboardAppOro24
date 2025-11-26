@@ -12,17 +12,18 @@
     text-align: center;
     font-size: 32px;
     font-weight: 800;
-    margin-bottom: 18px;
     letter-spacing: 2px;
     color: #ffffff;
-    text-transform: uppercase;  
+    text-transform: uppercase;
     animation: fadeInLogo 0.7s ease;
     position: absolute;
     top: 40px;
     left: 40px;
     background-color: #b58708;
-    padding: 20px;
-    border-radius: 30px;
+    padding: 16px 22px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(181, 135, 8, 0.4);
+    transition: 0.3s ease;
   }
 
   @keyframes fadeInLogo {
@@ -157,6 +158,12 @@
   
     .login-title {
       font-size: 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .logo {
+        display: none;
     }
   }
   
