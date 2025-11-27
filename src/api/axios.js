@@ -33,6 +33,7 @@ const userApi = axios.create({
       if (error.response?.status === 401) {
         store.dispatch(logout());
         localStorage.removeItem('orotoken');
+        localStorage.removeItem('oroemail');
         window.location.href = '/login';
       }
       return Promise.reject(error);

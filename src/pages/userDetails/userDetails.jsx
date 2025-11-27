@@ -11,6 +11,7 @@ import {
 } from '../../redux/slices/usersSlice';
 import UserInfo from '../../components/userInfo/userInfo';
 import UserPosts from '../../components/userPosts/userPosts';
+import LoadingSpinner from '../../components/loader/loadingSpinner';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -43,6 +44,12 @@ const UserDetails = () => {
       dispatch(clearCurrentUser());
     };
   }, [id, dispatch]);
+
+  if (isLoading) {
+    return <div className='user-details-loader'>
+        <LoadingSpinner width={40} height={40} />
+        </div>;
+  }
 
   if (!currentUser) return <div>User not found</div>;
 

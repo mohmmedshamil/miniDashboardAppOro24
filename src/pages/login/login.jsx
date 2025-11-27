@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../api/endPoints";
+import LoadingSpinner from "../../components/loader/loadingSpinner";
 import { loginStart, loginSuccess } from "../../redux/slices/authSlices";
 import "./login.scss";
 
@@ -22,6 +23,7 @@ const Login = () => {
             token: response.data.token,
             user: { email }
           }));
+          localStorage.setItem('oroemail', email);
           localStorage.setItem('orotoken', response.data.token);
           navigate('/dashboard');
         } catch (error) {
@@ -74,8 +76,8 @@ const Login = () => {
                             />
                         </div>
 
-                        <button type="submit" onClick={handleSubmit} className="login-btn">
-                            Sign In
+                        <button type="submit" onClick={handleSubmit} disabled={isLoading} className="login-btn">
+                        {isLoading ? <LoadingSpinner /> : 'Sign In'}
                         </button>
                     </form>
 

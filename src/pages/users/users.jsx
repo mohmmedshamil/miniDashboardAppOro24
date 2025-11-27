@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { usersAPI } from '../../api/endPoints';
+import LoadingSpinner from '../../components/loader/loadingSpinner';
 import Pagination from '../../components/pagination/pagination';
 import { usePaginatedSearch } from '../../hooks/usePaginatedSearch';
 import { fetchUsersFailure, fetchUsersStart, fetchUsersSuccess } from '../../redux/slices/usersSlice';
@@ -64,6 +65,9 @@ const Users = () => {
           />
         </div>
       </div>
+      {isLoading ? 
+        <LoadingSpinner width={40} height={40}/>
+        :
         <>
           <div className="users-table-container">
             <table className="users-table">
@@ -113,7 +117,7 @@ const Users = () => {
               />
             </div>
           )}
-        </>
+        </>}
     </div>
   );
 };

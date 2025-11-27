@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   token: localStorage.getItem('orotoken'),
-  user: null,
+  user:  localStorage.getItem('oroemail') ? {email:localStorage.getItem('oroemail') } : null,
   isLoading: false,
   error: null,
   loginTime: null,

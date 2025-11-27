@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__content">
-        <h1 className="header__title">Mini Dashboard</h1>
+        <h1 className="header__title">ORO24 Dashboard</h1>
         <div className="header__actions">
           <span className="header__user">Welcome, {user?.email || 'User'}</span>
           <button className="header__logout-btn" onClick={handleLogout}>
