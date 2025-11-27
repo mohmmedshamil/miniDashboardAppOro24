@@ -1,0 +1,42 @@
+.sidebar {
+    background: #1b1c1f;
+    color: #e6e6e6;
+    width: 250px;
+    min-height: calc(100vh - 80px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  
+    &__nav {
+      padding: 2rem 0;
+    }
+  
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  
+    &__item {
+      margin-bottom: 0.5rem;
+    }
+  
+    &__link {
+      display: block;
+      padding: 1rem 2rem;
+      color: #cfcfcf;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+  
+      &:hover {
+        background: rgba(181, 135, 8, 0.1);
+        color: #b58708;
+      }
+  
+      &--active {
+        background: rgba(181, 135, 8, 0.15);
+        color: #b58708;
+        border-left-color: #b58708;
+        font-weight: 600;
+      }
+    }
+  }

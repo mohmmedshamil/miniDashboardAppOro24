@@ -1,21 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { authAPI } from "../../api/endPoints";
+import { loginStart, loginSuccess } from "../../redux/slices/authSlices";
 import "./login.scss";
 
 const Login = () => {
     const [email, setEmail] = useState("eve.holt@reqres.in");
     const [password, setPassword] = useState("cityslicka");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isLoading, error, token } = useSelector((state) => state.auth);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
     
         try {
+            dispatch(loginStart());
           const response = await authAPI.login({ email, password });
+          dispatch(loginSuccess({ 
+            token: response.data.token,
+            user: { email }
+          }));
           localStorage.setItem('orotoken', response.data.token);
+          navigate('/dashboard');
         } catch (error) {
             console.log("error", error)
         }
       };
+    
+      useEffect(() => {
+        if (token) {
+          navigate('/dashboard');
+        }
+      }, [token, navigate]);
+    
 
     return (
         <div className="login-page">
