@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { usersAPI } from '../../api/endPoints';
 import Pagination from '../../components/pagination/pagination';
 import { usePaginatedSearch } from '../../hooks/usePaginatedSearch';
@@ -8,6 +9,7 @@ import './users.scss';
 
 const Users = () => {
   const dispatch = useDispatch();
+  const Navigate = useNavigate();
   const { users, isLoading, error } = useSelector((state) => state.users);
 
   const {
@@ -36,6 +38,10 @@ const Users = () => {
       fetchUsers();
     }
   }, [dispatch, users?.length]);
+
+  const handleRowClick = (userId) => {
+    Navigate(`/users/${userId}`);
+  };
 
   return (
     <div className="users-page">
@@ -76,6 +82,7 @@ const Users = () => {
                   <tr 
                     key={user.id} 
                     className="users-table__row"
+                    onClick={() => handleRowClick(user.id)}
                   >
                     <td>{user.id}</td>
                     <td>{user.name}</td>

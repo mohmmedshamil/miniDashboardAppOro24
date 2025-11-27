@@ -7,4 +7,6 @@ export const authAPI = {
 export const usersAPI = {
     getUsers: () => userApi.get('/users'),
     getUser: (id) => userApi.get(`/users/${id}`),
+    getUserPosts: (id) => userApi.get(`/users/${id}/posts`),
+    getPost: (id) => userApi.get(`/posts/${id}`),
   };
