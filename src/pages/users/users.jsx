@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { usersAPI } from '../../api/endPoints';
+import Pagination from '../../components/pagination/pagination';
+import { usePaginatedSearch } from '../../hooks/usePaginatedSearch';
 import { fetchUsersFailure, fetchUsersStart, fetchUsersSuccess } from '../../redux/slices/usersSlice';
 import './users.scss';
 
 const Users = () => {
   const dispatch = useDispatch();
   const { users, isLoading, error } = useSelector((state) => state.users);
-  const [searchTerm, setSearchTerm] = useState("")
+
+  const {
+    currentPage,
+    setCurrentPage,
+    searchTerm,
+    setSearchTerm,
+    filteredData,
+    totalPages,
+    totalItems,
+  } = usePaginatedSearch(users, 5);
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,7 +35,7 @@ const Users = () => {
     if (users.length === 0) {
       fetchUsers();
     }
-  }, [dispatch, users.length]);
+  }, [dispatch, users?.length]);
 
   return (
     <div className="users-page">
@@ -40,6 +52,7 @@ const Users = () => {
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
+              setCurrentPage(1);
             }}
             className="search-input"
           />
@@ -59,7 +72,7 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
+                {filteredData.map((user) => (
                   <tr 
                     key={user.id} 
                     className="users-table__row"
@@ -75,12 +88,24 @@ const Users = () => {
               </tbody>
             </table>
 
-            {users.length === 0 && !isLoading && (
+            {filteredData.length === 0 && !isLoading && (
               <div className="no-data">
                 <p>No users found matching your search criteria.</p>
               </div>
             )}
           </div>
+          {totalPages > 1 && (
+            <div className="users-pagination">
+              <div className="pagination-info">
+                Showing {filteredData.length} of {totalItems} users
+              </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </div>
+          )}
         </>
     </div>
   );

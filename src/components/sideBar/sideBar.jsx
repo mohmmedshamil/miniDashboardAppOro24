@@ -19,7 +19,7 @@ const Sidebar = () => {
           </li>
           <li className="sidebar__item">
             <NavLink 
-              to="/users" 
+              to="/dashboard/users" 
               className={({ isActive }) => 
                 `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`
               }

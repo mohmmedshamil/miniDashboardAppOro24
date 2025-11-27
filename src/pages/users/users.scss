@@ -88,3 +88,15 @@
     padding: 3rem;
     color: #7f8c8d;
   }
+
+  .users-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  .pagination-info {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
