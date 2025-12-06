@@ -5,7 +5,7 @@ import { store } from '../redux/store';
 const authApi = axios.create({
   baseURL: 'https://reqres.in/api',
   headers: {
-    'x-api-key': 'reqres-free-v1',
+    'x-api-key': 'reqres_97e4403b20f74f83ace889dbb24450f2',
     'Content-Type': 'application/json',
   },
 });
